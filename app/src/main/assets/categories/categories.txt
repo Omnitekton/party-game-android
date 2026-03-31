@@ -1,3 +1,5 @@
 # category_id|file_name|polish name|english name|optional drawable resource name
 cars|cars.txt|Samochody|Cars|ic_category_cars
 animals|animals.txt|Zwierzęta|Animals|ic_category_animals
+science|science.txt|Nauka|Science|ic_category_science
+food|food.txt|Jedzenie|Food|ic_category_food
