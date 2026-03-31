@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -40,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -52,6 +50,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.offlinepartygame.R
@@ -186,7 +185,6 @@ private fun ActiveRoundContent(
     val remainingSeconds = secondsRemaining(round.phaseEndsAtMillis, currentTimeMillis)
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    val isDoubleTap = effectiveSignalMethod == SignalMethod.DOUBLE_TAP
     val isShake = effectiveSignalMethod == SignalMethod.SHAKE
     val isButton = effectiveSignalMethod == SignalMethod.BUTTON
 
@@ -261,6 +259,7 @@ private fun PortraitRoundLayout(
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
             showButton = showButton,
+            isLandscape = false,
             modifier = Modifier.weight(1f),
         )
     }
@@ -278,12 +277,17 @@ private fun LandscapeRoundLayout(
     onSignalComplete: () -> Unit,
     showButton: Boolean,
 ) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    Column(
+        verticalArrangement = Arrangement.spacedBy(14.dp),
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
     ) {
+        LandscapeTopStatsBar(
+            round = round,
+            languageCode = languageCode,
+            remainingSeconds = remainingSeconds,
+        )
         RoundPhaseBody(
             round = round,
             languageCode = languageCode,
@@ -293,16 +297,9 @@ private fun LandscapeRoundLayout(
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
             showButton = showButton,
-            modifier = Modifier.weight(1.35f),
+            isLandscape = true,
+            modifier = Modifier.weight(1f),
         )
-        Column(
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-            modifier = Modifier
-                .weight(0.85f)
-                .fillMaxSize(),
-        ) {
-            HeaderPanel(round = round, languageCode = languageCode, remainingSeconds = remainingSeconds)
-        }
     }
 }
 
@@ -341,6 +338,76 @@ private fun HeaderPanel(
     }
 }
 
+
+@Composable
+private fun LandscapeTopStatsBar(
+    round: ActiveRound,
+    languageCode: String,
+    remainingSeconds: Int,
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp, vertical = 8.dp),
+        ) {
+            CompactLandscapeStat(
+                visualText = round.categoryDisplayName(languageCode),
+                contentDescription = stringResource(id = R.string.summary_category, round.categoryDisplayName(languageCode)),
+                emphasized = true,
+                modifier = Modifier.weight(1.9f),
+            )
+            CompactLandscapeStat(
+                visualText = "${remainingSeconds}s",
+                contentDescription = stringResource(id = R.string.round_timer_label, remainingSeconds),
+                modifier = Modifier.weight(0.9f),
+            )
+            CompactLandscapeStat(
+                visualText = "${round.currentTopicNumber}/${round.totalTopics}",
+                contentDescription = stringResource(id = R.string.round_topic_counter, round.currentTopicNumber, round.totalTopics),
+                modifier = Modifier.weight(0.95f),
+            )
+            CompactLandscapeStat(
+                visualText = "✓ ${round.completedCount}",
+                contentDescription = stringResource(id = R.string.round_completed_counter, round.completedCount),
+                modifier = Modifier.weight(0.85f),
+            )
+            CompactLandscapeStat(
+                visualText = "⌛ ${round.timedOutCount}",
+                contentDescription = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
+                modifier = Modifier.weight(0.95f),
+            )
+        }
+    }
+}
+
+@Composable
+private fun CompactLandscapeStat(
+    visualText: String,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    emphasized: Boolean = false,
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .semantics { this.contentDescription = contentDescription }
+            .padding(horizontal = 2.dp, vertical = 4.dp),
+    ) {
+        Text(
+            text = visualText,
+            style = if (emphasized) MaterialTheme.typography.titleMedium else MaterialTheme.typography.bodyLarge,
+            fontWeight = if (emphasized) FontWeight.SemiBold else FontWeight.Medium,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
 @Composable
 private fun RoundPhaseBody(
     round: ActiveRound,
@@ -352,6 +419,7 @@ private fun RoundPhaseBody(
     onSignalComplete: () -> Unit,
     showButton: Boolean,
     modifier: Modifier = Modifier,
+    isLandscape: Boolean = false,
 ) {
     when (round.phase) {
         RoundPhase.COUNTDOWN -> {
@@ -386,6 +454,7 @@ private fun RoundPhaseBody(
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
                 showButton = showButton,
+                isLandscape = isLandscape,
                 modifier = modifier,
             )
         }
@@ -432,6 +501,7 @@ private fun TopicPhaseLayout(
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     showButton: Boolean,
+    isLandscape: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val topicAreaDescription = stringResource(id = R.string.round_center_zone_label)
@@ -440,7 +510,7 @@ private fun TopicPhaseLayout(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(if (isLandscape) 20.dp else 16.dp),
         modifier = modifier.fillMaxSize(),
     ) {
         BoxWithConstraints(
@@ -472,9 +542,18 @@ private fun TopicPhaseLayout(
         ) {
             val availableWidth = maxWidth
             val availableHeight = maxHeight
-            val isWide = availableWidth > availableHeight
-            val topicFontSize = if (isWide) 44.sp else 58.sp
-            val topicLineHeight = if (isWide) 52.sp else 68.sp
+            val topicFontSize = when {
+                isLandscape && availableWidth >= 900.dp -> 82.sp
+                isLandscape -> 70.sp
+                availableWidth > availableHeight -> 44.sp
+                else -> 58.sp
+            }
+            val topicLineHeight = when {
+                isLandscape && availableWidth >= 900.dp -> 92.sp
+                isLandscape -> 80.sp
+                availableWidth > availableHeight -> 52.sp
+                else -> 68.sp
+            }
 
             Box(
                 contentAlignment = Alignment.Center,
@@ -487,8 +566,9 @@ private fun TopicPhaseLayout(
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp),
+                        .fillMaxWidth(if (isLandscape) 0.9f else 1f)
+                        .widthIn(max = if (isLandscape) 960.dp else 760.dp)
+                        .padding(horizontal = if (isLandscape) 24.dp else 12.dp),
                 )
             }
         }
@@ -499,18 +579,29 @@ private fun TopicPhaseLayout(
                 SignalMethod.SHAKE -> stringResource(id = R.string.round_signal_instruction_shake)
                 SignalMethod.BUTTON -> stringResource(id = R.string.round_signal_instruction_button)
             },
-            style = MaterialTheme.typography.bodyLarge,
+            style = if (isLandscape) MaterialTheme.typography.bodyMedium else MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth(if (isLandscape) 0.9f else 1f)
+                .widthIn(max = if (isLandscape) 720.dp else 760.dp),
         )
 
         if (showButton) {
             val completedButtonDescription = stringResource(id = R.string.accessibility_completed_button)
             Button(
                 onClick = onSignalComplete,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 58.dp)
-                    .semantics { contentDescription = completedButtonDescription },
+                modifier = if (isLandscape) {
+                    Modifier
+                        .fillMaxWidth(0.56f)
+                        .widthIn(max = 420.dp)
+                        .heightIn(min = 58.dp)
+                        .semantics { contentDescription = completedButtonDescription }
+                } else {
+                    Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 58.dp)
+                        .semantics { contentDescription = completedButtonDescription }
+                },
             ) {
                 Text(
                     text = stringResource(id = R.string.action_completed),

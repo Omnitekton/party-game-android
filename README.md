@@ -49,6 +49,24 @@ A topic can be marked as completed by:
 
 The completion signal method is configurable in Options.
 
+## Current customization options
+
+The current app build already includes these runtime settings:
+
+- language: System / Polish / English
+- completion signal: double tap / shake / button
+- topics per round
+- topic display duration
+- pre-round countdown duration
+- time-up message duration
+- haptic feedback on completion
+- keep screen awake during the round
+- background color 1
+- background color 2
+- font color
+- sounds on/off
+- sound volume
+
 ## Anti-repeat logic
 
 The app stores shown topic history in Room.
@@ -272,7 +290,11 @@ This behavior is intentional. The timers represent real elapsed time rather than
 
 ## Orientation and lifecycle
 
-The app is locked to **portrait** orientation. This is a deliberate simplification for a party-game layout with large readable text and predictable timers.
+The app is **not locked to portrait**.
+
+The session screen has dedicated portrait and landscape layouts. In landscape mode, the round stats are compressed into a single top row and the topic area stays centered with larger text. This makes it practical to rotate the phone during active gameplay without breaking the flow.
+
+Active rounds still survive background/resume and process death because the current round snapshot is persisted and restored on launch.
 
 ## Accessibility notes
 
@@ -284,6 +306,7 @@ Implemented:
 - timer content description
 - readable high-contrast layout
 - simple structure compatible with TalkBack
+- responsive session layout for both portrait and landscape play
 
 ## Testing
 
@@ -314,6 +337,6 @@ The core risk in this app is not complex rendering but deterministic game logic 
 - import/export of custom topic packs
 - better asset validation tooling
 - UI tests
-- tablet / landscape layouts
-- optional sound cues
-- custom theme settings
+- dedicated tablet layouts beyond the current responsive phone layouts
+- more category artwork and stronger visual identity on menu screens
+- richer transition animations and session polish

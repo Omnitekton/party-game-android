@@ -1,25 +1,100 @@
-# stable_id|polish text|english text
 car_001|Ferrari|Ferrari
-car_002|Samochód elektryczny|Electric car
-car_003|Kabriolet|Convertible
-car_004|Silnik V8|V8 engine
-car_005|Rajdowy samochód|Rally car
-car_006|Limuzyna|Limousine
-car_007|Samochód terenowy|Off-road vehicle
-car_008|Taksówka|Taxi
-car_009|Radiowóz|Police car
-car_010|Ambulans|Ambulance
-car_011|Autobus miejski|City bus
-car_012|Ciężarówka|Truck
-car_013|Pickup|Pickup truck
-car_014|Hybryda|Hybrid car
-car_015|Samochód autonomiczny|Self-driving car
-car_016|Paliwo diesel|Diesel fuel
-car_017|Samochód sportowy|Sports car
-car_018|Minivan|Minivan
-car_019|Kombi|Station wagon
-car_020|Sedan|Sedan
-car_021|SUV|SUV
-car_022|Stacja ładowania|Charging station
-car_023|Skrzynia biegów|Gearbox
-car_024|Hamulec ręczny|Handbrake
+car_002|Lamborghini|Lamborghini
+car_003|Porsche 911|Porsche 911
+car_004|Ford Mustang|Ford Mustang
+car_005|Jeep Wrangler|Jeep Wrangler
+car_006|Volkswagen Garbus|Volkswagen Beetle
+car_007|Fiat 126p|Fiat 126p
+car_008|Hummer|Hummer
+car_009|Tesla|Tesla
+car_010|Mini Cooper|Mini Cooper
+car_011|Rolls-Royce|Rolls-Royce
+car_012|DeLorean|DeLorean
+car_013|Subaru Impreza|Subaru Impreza
+car_014|Nissan GT-R|Nissan GT-R
+car_015|Toyota Supra|Toyota Supra
+car_016|Mazda MX-5|Mazda MX-5
+car_017|Land Rover Defender|Land Rover Defender
+car_018|Citroën 2CV|Citroën 2CV
+car_019|Trabant|Trabant
+car_020|Samochód rajdowy|Rally car
+car_021|Samochód Formuły 1|Formula 1 car
+car_022|Dragster|Dragster
+car_023|Monster truck|Monster truck
+car_024|Kabriolet|Convertible
+car_025|Coupe|Coupe
+car_026|Sedan|Sedan
+car_027|Kombi|Station wagon
+car_028|Hatchback|Hatchback
+car_029|SUV|SUV
+car_030|Pickup|Pickup truck
+car_031|Minivan|Minivan
+car_032|Limuzyna|Limousine
+car_033|Samochód terenowy|Off-road vehicle
+car_034|Taksówka|Taxi
+car_035|Radiowóz|Police car
+car_036|Ambulans|Ambulance
+car_037|Wóz strażacki|Fire engine
+car_038|Autobus szkolny|School bus
+car_039|Autobus piętrowy|Double-decker bus
+car_040|Cysterna|Tanker truck
+car_041|Betoniarka|Concrete mixer truck
+car_042|Laweta|Tow truck
+car_043|Kamper|Camper van
+car_044|Wyścigowy motocykl|Racing motorcycle
+car_045|Skuter|Scooter
+car_046|Quad|ATV
+car_047|Silnik V8|V8 engine
+car_048|Silnik elektryczny|Electric motor
+car_049|Turbosprężarka|Turbocharger
+car_050|Manualna skrzynia biegów|Manual transmission
+car_051|Automatyczna skrzynia biegów|Automatic transmission
+car_052|Napęd na cztery koła|Four-wheel drive
+car_053|Napęd na tylne koła|Rear-wheel drive
+car_054|Hamulec tarczowy|Disc brake
+car_055|Hamulec ręczny|Handbrake
+car_056|Kierownica|Steering wheel
+car_057|Lusterko wsteczne|Rearview mirror
+car_058|Kierunkowskaz|Turn signal
+car_059|Wycieraczki|Windshield wipers
+car_060|Felgi aluminiowe|Alloy wheels
+car_061|Opony zimowe|Winter tires
+car_062|Reflektory LED|LED headlights
+car_063|Wydech sportowy|Sports exhaust
+car_064|Akumulator|Car battery
+car_065|Katalizator|Catalytic converter
+car_066|Stacja benzynowa|Gas station
+car_067|Stacja ładowania|Charging station
+car_068|Autostrada|Highway
+car_069|Rondo|Roundabout
+car_070|Sygnalizacja świetlna|Traffic lights
+car_071|Fotoradar|Speed camera
+car_072|Korek uliczny|Traffic jam
+car_073|Myjnia samochodowa|Car wash
+car_074|Warsztat samochodowy|Car repair shop
+car_075|Wulkanizacja|Tire shop
+car_076|Parking|Parking lot
+car_077|Parkowanie równoległe|Parallel parking
+car_078|Czujnik parkowania|Parking sensor
+car_079|Kamera cofania|Backup camera
+car_080|Nawigacja GPS|GPS navigation
+car_081|Tempomat|Cruise control
+car_082|Pasy bezpieczeństwa|Seat belt
+car_083|Poduszka powietrzna|Airbag
+car_084|Fotelik dziecięcy|Child car seat
+car_085|Kluczyk samochodowy|Car key
+car_086|Bezkluczykowy dostęp|Keyless entry
+car_087|Odpalanie przyciskiem|Push-button start
+car_088|Samochód autonomiczny|Self-driving car
+car_089|Hypercar|Hypercar
+car_090|Muscle car|Muscle car
+car_091|Hot hatch|Hot hatch
+car_092|Miejski samochód elektryczny|Electric city car
+car_093|Drift|Drifting
+car_094|Burnout|Burnout
+car_095|Przebita opona|Flat tire
+car_096|Awaria silnika|Engine breakdown
+car_097|Stłuczka|Fender bender
+car_098|Blokada koła|Wheel clamp
+car_099|Bagażnik dachowy|Roof rack
+car_100|Podróż samochodem|Road trip

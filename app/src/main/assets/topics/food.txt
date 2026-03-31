@@ -1,0 +1,100 @@
+food_001|Pizza Margherita|Margherita pizza
+food_002|Spaghetti bolognese|Spaghetti bolognese
+food_003|Sushi|Sushi
+food_004|Hamburger|Hamburger
+food_005|Fish and chips|Fish and chips
+food_006|Pierogi ruskie|Potato and cheese pierogi
+food_007|Bigos|Hunter's stew
+food_008|Żurek|Sour rye soup
+food_009|Kotlet schabowy|Breaded pork cutlet
+food_010|Tatar wołowy|Steak tartare
+food_011|Kebab|Kebab
+food_012|Taco|Taco
+food_013|Burrito|Burrito
+food_014|Paella|Paella
+food_015|Ratatouille|Ratatouille
+food_016|Fondue|Fondue
+food_017|Raclette|Raclette
+food_018|Curry|Curry
+food_019|Pad Thai|Pad Thai
+food_020|Ramen|Ramen
+food_021|Pho|Pho
+food_022|Dim sum|Dim sum
+food_023|Kurczak tikka masala|Chicken tikka masala
+food_024|Falafel|Falafel
+food_025|Hummus|Hummus
+food_026|Stek|Steak
+food_027|Lasagne|Lasagna
+food_028|Risotto|Risotto
+food_029|Gnocchi|Gnocchi
+food_030|Krewetki|Shrimp
+food_031|Łosoś wędzony|Smoked salmon
+food_032|Tuńczyk|Tuna
+food_033|Makaron z owocami morza|Seafood pasta
+food_034|Pieczony kurczak|Roast chicken
+food_035|Kaczka po pekińsku|Peking duck
+food_036|Żeberka|Ribs
+food_037|Kiełbasa z grilla|Grilled sausage
+food_038|Boczek|Bacon
+food_039|Jajecznica|Scrambled eggs
+food_040|Omlet|Omelette
+food_041|Jajka po benedyktyńsku|Eggs Benedict
+food_042|Naleśniki|Crepes
+food_043|Gofry|Waffles
+food_044|Tosty francuskie|French toast
+food_045|Owsianka|Oatmeal
+food_046|Croissant|Croissant
+food_047|Hot dog|Hot dog
+food_048|Zapiekanka|Polish baguette pizza
+food_049|Quesadilla|Quesadilla
+food_050|Nachosy|Nachos
+food_051|Frytki|French fries
+food_052|Krążki cebulowe|Onion rings
+food_053|Sałatka Cezar|Caesar salad
+food_054|Sałatka grecka|Greek salad
+food_055|Rosół|Chicken broth
+food_056|Zupa pomidorowa|Tomato soup
+food_057|Barszcz czerwony|Beetroot soup
+food_058|Krem z dyni|Pumpkin soup
+food_059|Sajgonki|Spring rolls
+food_060|Nuggetsy z kurczaka|Chicken nuggets
+food_061|Kurczak z rożna|Rotisserie chicken
+food_062|Pizza pepperoni|Pepperoni pizza
+food_063|Spaghetti carbonara|Spaghetti carbonara
+food_064|Pierogi z mięsem|Meat pierogi
+food_065|Gołąbki|Cabbage rolls
+food_066|Placki ziemniaczane|Potato pancakes
+food_067|Kluski śląskie|Silesian dumplings
+food_068|Kotlety mielone|Meat patties
+food_069|Pieczony camembert|Baked Camembert
+food_070|Kanapka klubowa|Club sandwich
+food_071|Tost z serem|Grilled cheese sandwich
+food_072|Bagietka czosnkowa|Garlic bread
+food_073|Bruschetta|Bruschetta
+food_074|Guacamole|Guacamole
+food_075|Pieczone ziemniaki|Baked potatoes
+food_076|Sernik|Cheesecake
+food_077|Tarta cytrynowa|Lemon tart
+food_078|Crème brûlée|Crème brûlée
+food_079|Tiramisu|Tiramisu
+food_080|Panna cotta|Panna cotta
+food_081|Lody włoskie|Gelato
+food_082|Makaronik|Macaron
+food_083|Ekler|Éclair
+food_084|Brownie|Brownie
+food_085|Ciasto marchewkowe|Carrot cake
+food_086|Szarlotka|Apple pie
+food_087|Pączek|Doughnut
+food_088|Faworki|Angel wings
+food_089|Muffin|Muffin
+food_090|Lody na patyku|Ice pop
+food_091|Czekolada na gorąco|Hot chocolate
+food_092|Koktajl mleczny|Milkshake
+food_093|Smoothie|Smoothie
+food_094|Sok pomarańczowy|Orange juice
+food_095|Herbata|Tea
+food_096|Kawa|Coffee
+food_097|Cola|Cola
+food_098|Bubble tea|Bubble tea
+food_099|Lemoniada|Lemonade
+food_100|Mojito|Mojito

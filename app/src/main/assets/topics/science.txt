@@ -1,0 +1,100 @@
+science_001|Atom|Atom
+science_002|Molekuła|Molecule
+science_003|DNA|DNA
+science_004|Komórka|Cell
+science_005|Bakteria|Bacterium
+science_006|Wirus|Virus
+science_007|Mikroskop|Microscope
+science_008|Teleskop|Telescope
+science_009|Planeta|Planet
+science_010|Gwiazda|Star
+science_011|Galaktyka|Galaxy
+science_012|Czarna dziura|Black hole
+science_013|Kometa|Comet
+science_014|Asteroida|Asteroid
+science_015|Meteoryt|Meteorite
+science_016|Księżyc|Moon
+science_017|Słońce|Sun
+science_018|Układ słoneczny|Solar system
+science_019|Rakieta|Rocket
+science_020|Astronauta|Astronaut
+science_021|Grawitacja|Gravity
+science_022|Magnetyzm|Magnetism
+science_023|Elektryczność|Electricity
+science_024|Laser|Laser
+science_025|Robot|Robot
+science_026|Sztuczna inteligencja|Artificial intelligence
+science_027|Algorytm|Algorithm
+science_028|Matematyka|Mathematics
+science_029|Geometria|Geometry
+science_030|Algebra|Algebra
+science_031|Liczba pierwsza|Prime number
+science_032|Ułamek|Fraction
+science_033|Równanie|Equation
+science_034|Liczba pi|Pi
+science_035|Nieskończoność|Infinity
+science_036|Chemia|Chemistry
+science_037|Fizyka|Physics
+science_038|Biologia|Biology
+science_039|Astronomia|Astronomy
+science_040|Geologia|Geology
+science_041|Ewolucja|Evolution
+science_042|Gen|Gene
+science_043|Chromosom|Chromosome
+science_044|Szkielet|Skeleton
+science_045|Mózg|Brain
+science_046|Serce|Heart
+science_047|Płuco|Lung
+science_048|Kość|Bone
+science_049|Mięsień|Muscle
+science_050|Krew|Blood
+science_051|Neuron|Neuron
+science_052|Ekosystem|Ecosystem
+science_053|Fotosynteza|Photosynthesis
+science_054|Tlen|Oxygen
+science_055|Wodór|Hydrogen
+science_056|Węgiel|Carbon
+science_057|Złoto|Gold
+science_058|Żelazo|Iron
+science_059|Rtęć|Mercury
+science_060|Woda|Water
+science_061|Lód|Ice
+science_062|Para wodna|Water vapor
+science_063|Wulkan|Volcano
+science_064|Trzęsienie ziemi|Earthquake
+science_065|Kontynent|Continent
+science_066|Ocean|Ocean
+science_067|Skamieniałość|Fossil
+science_068|Dinozaur|Dinosaur
+science_069|Eksperyment|Experiment
+science_070|Hipoteza|Hypothesis
+science_071|Teoria|Theory
+science_072|Laboratorium|Laboratory
+science_073|Probówka|Test tube
+science_074|Kolba|Flask
+science_075|Pipeta|Pipette
+science_076|Odczynnik|Reagent
+science_077|Układ okresowy pierwiastków|Periodic table
+science_078|Pierwiastek chemiczny|Chemical element
+science_079|Proton|Proton
+science_080|Neutron|Neutron
+science_081|Elektron|Electron
+science_082|Prędkość światła|Speed of light
+science_083|Czasoprzestrzeń|Spacetime
+science_084|Satelita|Satellite
+science_085|Łazik marsjański|Mars rover
+science_086|Mars|Mars
+science_087|Jowisz|Jupiter
+science_088|Saturn|Saturn
+science_089|Tęcza|Rainbow
+science_090|Błyskawica|Lightning
+science_091|Tornado|Tornado
+science_092|Huragan|Hurricane
+science_093|Klonowanie|Cloning
+science_094|Szczepionka|Vaccine
+science_095|Antybiotyk|Antibiotic
+science_096|Wirówka|Centrifuge
+science_097|Termometr|Thermometer
+science_098|Barometr|Barometer
+science_099|Kompas|Compass
+science_100|Naukowiec|Scientist
