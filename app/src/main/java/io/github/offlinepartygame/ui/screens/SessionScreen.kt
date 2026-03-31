@@ -725,51 +725,101 @@ private fun SummaryContent(
     modifier: Modifier = Modifier,
 ) {
     val languageCode = currentLanguageCode()
+
     Surface(modifier = modifier.fillMaxSize()) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.CenterVertically),
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),
+                .padding(horizontal = 20.dp, vertical = 24.dp),
         ) {
-            Text(
-                text = stringResource(id = R.string.summary_title),
-                style = MaterialTheme.typography.headlineLarge,
-                textAlign = TextAlign.Center,
-            )
-            Card(modifier = Modifier.widthIn(max = 560.dp).fillMaxWidth()) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.padding(20.dp),
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .widthIn(max = 560.dp),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.summary_title),
+                    style = MaterialTheme.typography.headlineLarge,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.padding(20.dp),
+                    ) {
+                        Text(
+                            text = stringResource(
+                                id = R.string.summary_category,
+                                summary.categoryDisplayName(languageCode),
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.summary_mode,
+                                stringResource(id = R.string.mode_storytelling_name),
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.summary_completed,
+                                summary.completedCount,
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.summary_timed_out,
+                                summary.timedOutCount,
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.summary_total,
+                                summary.totalTopics,
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                    }
+                }
+
+                Button(
+                    onClick = onPlayAgain,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 56.dp),
                 ) {
                     Text(
-                        text = stringResource(id = R.string.summary_category, summary.categoryDisplayName(languageCode)),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.summary_mode, stringResource(id = R.string.mode_storytelling_name)),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.summary_completed, summary.completedCount),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.summary_timed_out, summary.timedOutCount),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.summary_total, summary.totalTopics),
-                        style = MaterialTheme.typography.bodyLarge,
+                        text = stringResource(id = R.string.action_play_again),
+                        style = MaterialTheme.typography.titleLarge,
                     )
                 }
-            }
-            Button(onClick = onPlayAgain, modifier = Modifier.fillMaxWidth()) {
-                Text(text = stringResource(id = R.string.action_play_again), style = MaterialTheme.typography.titleLarge)
-            }
-            TextButton(onClick = onBackToMenu, modifier = Modifier.fillMaxWidth()) {
-                Text(text = stringResource(id = R.string.action_back_to_menu), style = MaterialTheme.typography.titleLarge)
+
+                Button(
+                    onClick = onBackToMenu,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 56.dp),
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.action_back_to_menu),
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
             }
         }
     }
