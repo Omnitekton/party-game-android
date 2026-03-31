@@ -24,13 +24,13 @@ data class AppSettings(
     )
 
     companion object {
-        const val DEFAULT_TOPICS_PER_ROUND = 10
+        const val DEFAULT_TOPICS_PER_ROUND = 5
         const val DEFAULT_TOPIC_DURATION_SEC = 30
-        const val DEFAULT_PRE_ROUND_COUNTDOWN_SEC = 10
+        const val DEFAULT_PRE_ROUND_COUNTDOWN_SEC = 5
         const val DEFAULT_TIMEOUT_MESSAGE_DURATION_SEC = 5
         const val DEFAULT_SOUND_VOLUME_LEVEL = 7
-        val DEFAULT_BACKGROUND_COLOR_PRIMARY = ThemeColorOption.WHITE
-        val DEFAULT_BACKGROUND_COLOR_SECONDARY = ThemeColorOption.DARK_GRAY
-        val DEFAULT_FONT_COLOR = ThemeColorOption.BLACK
+        val DEFAULT_BACKGROUND_COLOR_PRIMARY = ThemeColorOption.COLOR1
+        val DEFAULT_BACKGROUND_COLOR_SECONDARY = ThemeColorOption.COLOR7
+        val DEFAULT_FONT_COLOR = ThemeColorOption.COLOR10
     }
 }

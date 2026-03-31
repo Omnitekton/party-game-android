@@ -6,21 +6,32 @@ enum class ThemeColorOption(
     val storageKey: String,
     val color: Color,
 ) {
-    WHITE("white", Color(0xFFFFFFFF)),
-    SOFT_IVORY("soft_ivory", Color(0xFFF8F4EA)),
-    SOFT_BLUE("soft_blue", Color(0xFFEAF3FF)),
-    SOFT_GREEN("soft_green", Color(0xFFEAF7EF)),
-    MID_GRAY("mid_gray", Color(0xFFD7DADF)),
-    SLATE("slate", Color(0xFF8B93A1)),
-    DARK_GRAY("dark_gray", Color(0xFF6A707A)),
-    CHARCOAL("charcoal", Color(0xFF4E545D)),
-    BLACK("black", Color(0xFF111111)),
-    NAVY("navy", Color(0xFF243447));
+    COLOR1("C1", Color(0xFFFFFFFF)), // white
+    COLOR2("C2", Color(0xFFFFEB3B)), // yellow
+    COLOR3("C3", Color(0xFFFF9800)), // orange
+    COLOR4("C4", Color(0xFFF44336)), // red
+    COLOR5("C5", Color(0xFF4CAF50)), // green
+    COLOR6("C6", Color(0xFF00BCD4)), // cyan
+    COLOR7("C7", Color(0xFF2196F3)), // blue
+    COLOR8("C8", Color(0xFF9C27B0)), // purple
+    COLOR9("C9", Color(0xFF616161)), // gray
+    COLOR10("C10", Color(0xFF000000)); // black
 
     companion object {
-        val background1Defaults = listOf(WHITE, SOFT_IVORY, SOFT_BLUE, SOFT_GREEN, MID_GRAY)
-        val background2Defaults = listOf(DARK_GRAY, SLATE, MID_GRAY, NAVY, CHARCOAL)
-        val fontDefaults = listOf(BLACK, CHARCOAL, NAVY, WHITE)
+        val background1Defaults = listOf(
+            COLOR1, COLOR2, COLOR3, COLOR4, COLOR5,
+            COLOR6, COLOR7, COLOR8, COLOR9, COLOR10,
+        )
+
+        val background2Defaults = listOf(
+            COLOR1, COLOR2, COLOR3, COLOR4, COLOR5,
+            COLOR6, COLOR7, COLOR8, COLOR9, COLOR10,
+        )
+
+        val fontDefaults = listOf(
+            COLOR1, COLOR2, COLOR3, COLOR4, COLOR5,
+            COLOR6, COLOR7, COLOR8, COLOR9, COLOR10,
+        )
 
         fun fromStorage(value: String?, fallback: ThemeColorOption): ThemeColorOption =
             entries.firstOrNull { it.storageKey == value } ?: fallback

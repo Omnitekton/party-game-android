@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -268,14 +267,14 @@ private fun languageLabel(language: AppLanguage): String = when (language) {
 
 @Composable
 private fun themeColorLabel(color: ThemeColorOption): String = when (color) {
-    ThemeColorOption.WHITE -> stringResource(id = R.string.theme_color_white)
-    ThemeColorOption.SOFT_IVORY -> stringResource(id = R.string.theme_color_soft_ivory)
-    ThemeColorOption.SOFT_BLUE -> stringResource(id = R.string.theme_color_soft_blue)
-    ThemeColorOption.SOFT_GREEN -> stringResource(id = R.string.theme_color_soft_green)
-    ThemeColorOption.MID_GRAY -> stringResource(id = R.string.theme_color_mid_gray)
-    ThemeColorOption.SLATE -> stringResource(id = R.string.theme_color_slate)
-    ThemeColorOption.DARK_GRAY -> stringResource(id = R.string.theme_color_dark_gray)
-    ThemeColorOption.CHARCOAL -> stringResource(id = R.string.theme_color_charcoal)
-    ThemeColorOption.BLACK -> stringResource(id = R.string.theme_color_black)
-    ThemeColorOption.NAVY -> stringResource(id = R.string.theme_color_navy)
+    ThemeColorOption.COLOR1 -> stringResource(id = R.string.theme_color_1)
+    ThemeColorOption.COLOR2 -> stringResource(id = R.string.theme_color_2)
+    ThemeColorOption.COLOR3 -> stringResource(id = R.string.theme_color_3)
+    ThemeColorOption.COLOR4 -> stringResource(id = R.string.theme_color_4)
+    ThemeColorOption.COLOR5 -> stringResource(id = R.string.theme_color_5)
+    ThemeColorOption.COLOR6 -> stringResource(id = R.string.theme_color_6)
+    ThemeColorOption.COLOR7 -> stringResource(id = R.string.theme_color_7)
+    ThemeColorOption.COLOR8 -> stringResource(id = R.string.theme_color_8)
+    ThemeColorOption.COLOR9 -> stringResource(id = R.string.theme_color_9)
+    ThemeColorOption.COLOR10 -> stringResource(id = R.string.theme_color_10)
 }

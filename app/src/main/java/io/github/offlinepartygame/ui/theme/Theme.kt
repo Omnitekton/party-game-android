@@ -7,12 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.luminance
 import io.github.offlinepartygame.domain.model.AppSettings
 
-private val AccentPrimary = androidx.compose.ui.graphics.Color(0xFF2C5F8A)
-private val AccentOnPrimary = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
-private val AccentSecondary = androidx.compose.ui.graphics.Color(0xFF4C6072)
-private val AccentError = androidx.compose.ui.graphics.Color(0xFFB3261E)
-private val AccentOnError = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
-
 @Composable
 fun OfflinePartyGameTheme(
     settings: AppSettings = AppSettings(),
@@ -25,31 +19,33 @@ fun OfflinePartyGameTheme(
 
     val colorScheme = if (isDark) {
         darkColorScheme(
-            primary = AccentPrimary,
-            onPrimary = AccentOnPrimary,
-            secondary = AccentSecondary,
+            primary = surface,
+            onPrimary = onBase,
+            secondary = surface,
+            onSecondary = onBase,
             background = background,
             surface = surface,
             surfaceVariant = surface,
             onBackground = onBase,
             onSurface = onBase,
             onSurfaceVariant = onBase,
-            error = AccentError,
-            onError = AccentOnError,
+            error = androidx.compose.ui.graphics.Color(0xFFB3261E),
+            onError = androidx.compose.ui.graphics.Color(0xFFFFFFFF),
         )
     } else {
         lightColorScheme(
-            primary = AccentPrimary,
-            onPrimary = AccentOnPrimary,
-            secondary = AccentSecondary,
+            primary = surface,
+            onPrimary = onBase,
+            secondary = surface,
+            onSecondary = onBase,
             background = background,
             surface = surface,
             surfaceVariant = surface,
             onBackground = onBase,
             onSurface = onBase,
             onSurfaceVariant = onBase,
-            error = AccentError,
-            onError = AccentOnError,
+            error = androidx.compose.ui.graphics.Color(0xFFB3261E),
+            onError = androidx.compose.ui.graphics.Color(0xFFFFFFFF),
         )
     }
 

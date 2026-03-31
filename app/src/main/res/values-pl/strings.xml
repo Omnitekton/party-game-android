@@ -70,16 +70,16 @@
     <string name="options_sound_volume">Głośność dźwięków (1–10)</string>
     <string name="options_value_format">%1$d</string>
 
-    <string name="theme_color_white">Biały</string>
-    <string name="theme_color_soft_ivory">Jasna kość słoniowa</string>
-    <string name="theme_color_soft_blue">Jasny błękit</string>
-    <string name="theme_color_soft_green">Jasna zieleń</string>
-    <string name="theme_color_mid_gray">Średni szary</string>
-    <string name="theme_color_slate">Łupkowy</string>
-    <string name="theme_color_dark_gray">Ciemny szary</string>
-    <string name="theme_color_charcoal">Grafitowy</string>
-    <string name="theme_color_black">Czarny</string>
-    <string name="theme_color_navy">Granatowy</string>
+    <string name="theme_color_1">Kolor 1</string>
+    <string name="theme_color_2">Kolor 2</string>
+    <string name="theme_color_3">Kolor 3</string>
+    <string name="theme_color_4">Kolor 4</string>
+    <string name="theme_color_5">Kolor 5</string>
+    <string name="theme_color_6">Kolor 6</string>
+    <string name="theme_color_7">Kolor 7</string>
+    <string name="theme_color_8">Kolor 8</string>
+    <string name="theme_color_9">Kolor 9</string>
+    <string name="theme_color_10">Kolor 10</string>
 
     <string name="catalog_warning_hidden_categories">Część kategorii została pominięta, bo ich pliki treści są nieprawidłowe.</string>
     <string name="catalog_empty_message">Brak dostępnych kategorii do gry.</string>

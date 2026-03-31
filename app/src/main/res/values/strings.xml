@@ -70,16 +70,16 @@
     <string name="options_sound_volume">Sound volume (1–10)</string>
     <string name="options_value_format">%1$d</string>
 
-    <string name="theme_color_white">White</string>
-    <string name="theme_color_soft_ivory">Soft ivory</string>
-    <string name="theme_color_soft_blue">Soft blue</string>
-    <string name="theme_color_soft_green">Soft green</string>
-    <string name="theme_color_mid_gray">Mid gray</string>
-    <string name="theme_color_slate">Slate</string>
-    <string name="theme_color_dark_gray">Dark gray</string>
-    <string name="theme_color_charcoal">Charcoal</string>
-    <string name="theme_color_black">Black</string>
-    <string name="theme_color_navy">Navy</string>
+    <string name="theme_color_1">Color 1</string>
+    <string name="theme_color_2">Color 2</string>
+    <string name="theme_color_3">Color 3</string>
+    <string name="theme_color_4">Color 4</string>
+    <string name="theme_color_5">Color 5</string>
+    <string name="theme_color_6">Color 6</string>
+    <string name="theme_color_7">Color 7</string>
+    <string name="theme_color_8">Color 8</string>
+    <string name="theme_color_9">Color 9</string>
+    <string name="theme_color_10">Color 10</string>
 
     <string name="catalog_warning_hidden_categories">Some categories were skipped because their content files are invalid.</string>
     <string name="catalog_empty_message">No playable categories are available.</string>
