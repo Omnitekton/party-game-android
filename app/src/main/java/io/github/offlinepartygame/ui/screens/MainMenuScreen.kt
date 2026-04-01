@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
@@ -39,8 +39,8 @@ fun MainMenuScreen(
         ) {
             val isLandscape = maxWidth > maxHeight
             val contentSpacing = if (isLandscape) 16.dp else 20.dp
-            val heroWidthFraction = if (isLandscape) 0.44f else 0.72f
-            val heroMaxHeight = if (isLandscape) 128.dp else 180.dp
+            val heroWidthFraction = if (isLandscape) 0.52f else 0.82f
+            val heroHeight = if (isLandscape) 180.dp else 240.dp
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(contentSpacing, alignment = Alignment.CenterVertically),
@@ -61,7 +61,7 @@ fun MainMenuScreen(
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
                     modifier = Modifier
                         .fillMaxWidth(heroWidthFraction)
-                        .heightIn(max = heroMaxHeight),
+                        .height(heroHeight),
                 )
 
                 Column(
