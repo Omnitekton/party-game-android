@@ -1,6 +1,6 @@
-# Offline Party Game
+# Verbus
 
-Offline Android party game written in Kotlin + Jetpack Compose.
+Verbus is an offline Android party game built with Kotlin and Jetpack Compose.
 
 License: **MIT**. See [LICENSE](LICENSE).
 
