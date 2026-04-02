@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gra Towarzyska Offline</string>
+    <string name="app_name">Verbus</string>
 
     <string name="menu_play">Gra</string>
     <string name="menu_options">Opcje</string>

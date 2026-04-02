@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Offline Party Game</string>
+    <string name="app_name">Verbus</string>
 
     <string name="menu_play">Play</string>
     <string name="menu_options">Options</string>
