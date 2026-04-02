@@ -5,7 +5,7 @@ Verbus is an offline Android party game built with Kotlin and Jetpack Compose.
 License: **MIT**. See [LICENSE](LICENSE).
 
 ## Screenshots
-![Test](screenshots/Screenshot_20260402_191417.png)
+<img src="./screenshots/Screenshot_20260402_191417.png" alt="Menu" width="320">
 
 ## What is in the repo right now
 
