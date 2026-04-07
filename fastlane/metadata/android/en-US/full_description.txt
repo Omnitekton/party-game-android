@@ -1,0 +1,19 @@
+Verbus is an open-source offline word guessing game for local play on a single device.
+
+Choose a category, start a round, and guess as many words as possible before time runs out. The game is designed for fast setup, simple controls, and smooth in-person play with friends or family.
+
+Verbus focuses on straightforward offline gameplay:
+- no account
+- no ads
+- no online requirement
+- no tracking
+- no unnecessary distractions
+
+Features:
+- offline local gameplay
+- category-based rounds
+- English and Polish language support
+- simple and lightweight interface
+- open-source codebase
+
+Verbus is a good fit for house parties, casual meetups, travel, and spontaneous game sessions when you want a quick local guessing game without extra setup.
