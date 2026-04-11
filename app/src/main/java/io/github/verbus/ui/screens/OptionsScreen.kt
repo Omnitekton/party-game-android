@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,6 +28,7 @@ import io.github.verbus.ui.components.ScreenScaffold
 import io.github.verbus.ui.components.SectionHeader
 import io.github.verbus.ui.components.StepSettingCard
 import io.github.verbus.ui.components.ToggleSettingCard
+import io.github.verbus.ui.feedback.rememberUiFeedbackController
 import io.github.verbus.ui.viewmodel.OptionsUiState
 
 @Composable
@@ -43,8 +46,14 @@ fun OptionsScreen(
     onBackgroundColorPrimaryDelta: (Int) -> Unit,
     onBackgroundColorSecondaryDelta: (Int) -> Unit,
     onFontColorDelta: (Int) -> Unit,
+    onAccentColorDelta: (Int) -> Unit,
+    onAccentTextColorDelta: (Int) -> Unit,
     onSoundsEnabledChanged: (Boolean) -> Unit,
     onSoundVolumeDelta: (Int) -> Unit,
+    onSoundSetDelta: (Int) -> Unit,
+    onTouchVisualFeedbackChanged: (Boolean) -> Unit,
+    onTouchHapticFeedbackChanged: (Boolean) -> Unit,
+    onTouchSoundFeedbackChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ScreenScaffold(
@@ -138,6 +147,8 @@ fun OptionsScreen(
                     valueText = themeColorLabel(uiState.settings.backgroundColorPrimary),
                     onPrevious = { onBackgroundColorPrimaryDelta(-1) },
                     onNext = { onBackgroundColorPrimaryDelta(1) },
+                    valueContainerColor = uiState.settings.backgroundColorPrimary.color,
+                    valueContentColor = contrastTextColor(uiState.settings.backgroundColorPrimary.color),
                 )
             }
             item {
@@ -146,6 +157,8 @@ fun OptionsScreen(
                     valueText = themeColorLabel(uiState.settings.backgroundColorSecondary),
                     onPrevious = { onBackgroundColorSecondaryDelta(-1) },
                     onNext = { onBackgroundColorSecondaryDelta(1) },
+                    valueContainerColor = uiState.settings.backgroundColorSecondary.color,
+                    valueContentColor = contrastTextColor(uiState.settings.backgroundColorSecondary.color),
                 )
             }
             item {
@@ -154,6 +167,28 @@ fun OptionsScreen(
                     valueText = themeColorLabel(uiState.settings.fontColor),
                     onPrevious = { onFontColorDelta(-1) },
                     onNext = { onFontColorDelta(1) },
+                    valueContainerColor = uiState.settings.fontColor.color,
+                    valueContentColor = contrastTextColor(uiState.settings.fontColor.color),
+                )
+            }
+            item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_theme_accent_color),
+                    valueText = themeColorLabel(uiState.settings.accentColor),
+                    onPrevious = { onAccentColorDelta(-1) },
+                    onNext = { onAccentColorDelta(1) },
+                    valueContainerColor = uiState.settings.accentColor.color,
+                    valueContentColor = contrastTextColor(uiState.settings.accentColor.color),
+                )
+            }
+            item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_theme_accent_text_color),
+                    valueText = themeColorLabel(uiState.settings.accentTextColor),
+                    onPrevious = { onAccentTextColorDelta(-1) },
+                    onNext = { onAccentTextColorDelta(1) },
+                    valueContainerColor = uiState.settings.accentTextColor.color,
+                    valueContentColor = contrastTextColor(uiState.settings.accentTextColor.color),
                 )
             }
             item {
@@ -167,11 +202,43 @@ fun OptionsScreen(
                 )
             }
             item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_sound_set),
+                    valueText = soundSetLabel(uiState),
+                    onPrevious = { onSoundSetDelta(-1) },
+                    onNext = { onSoundSetDelta(1) },
+                )
+            }
+            item {
                 StepSettingCard(
                     title = stringResource(id = R.string.options_sound_volume),
                     valueText = stringResource(id = R.string.options_value_format, uiState.settings.soundVolumeLevel),
                     onDecrease = { onSoundVolumeDelta(-1) },
                     onIncrease = { onSoundVolumeDelta(1) },
+                )
+            }
+            item {
+                SectionHeader(text = stringResource(id = R.string.options_section_touch_feedback))
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_visual_feedback),
+                    checked = uiState.settings.touchVisualFeedbackEnabled,
+                    onCheckedChange = onTouchVisualFeedbackChanged,
+                )
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_haptic_feedback),
+                    checked = uiState.settings.touchHapticFeedbackEnabled,
+                    onCheckedChange = onTouchHapticFeedbackChanged,
+                )
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_sound_feedback),
+                    checked = uiState.settings.touchSoundFeedbackEnabled,
+                    onCheckedChange = onTouchSoundFeedbackChanged,
                 )
             }
         }
@@ -234,8 +301,13 @@ private fun SignalOptionRow(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
+    val feedback = rememberUiFeedbackController()
+
     Card(
-        onClick = onClick,
+        onClick = {
+            feedback.onUiInteraction()
+            onClick()
+        },
         enabled = enabled,
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -246,7 +318,7 @@ private fun SignalOptionRow(
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
-            RadioButton(selected = selected, onClick = onClick, enabled = enabled)
+            RadioButton(selected = selected, onClick = { feedback.onUiInteraction(); onClick() }, enabled = enabled)
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyLarge,
@@ -275,3 +347,12 @@ private fun themeColorLabel(color: ThemeColorOption): String = when (color) {
     ThemeColorOption.COLOR9 -> stringResource(id = R.string.theme_color_9)
     ThemeColorOption.COLOR10 -> stringResource(id = R.string.theme_color_10)
 }
+
+@Composable
+private fun soundSetLabel(uiState: OptionsUiState): String {
+    val selected = uiState.availableSoundSets.firstOrNull { it.id == uiState.settings.selectedSoundSetId }
+    return selected?.displayName ?: stringResource(id = R.string.options_sound_set_builtin)
+}
+
+private fun contrastTextColor(background: Color): Color =
+    if (background.luminance() > 0.5f) Color.Black else Color.White

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,12 +29,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.verbus.R
+import io.github.verbus.ui.feedback.rememberUiFeedbackController
 
 @Composable
 fun MenuActionButton(
@@ -41,19 +46,21 @@ fun MenuActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val feedback = rememberUiFeedbackController()
     Button(
-        onClick = onClick,
+        onClick = {
+            feedback.onUiInteraction()
+            onClick()
+        },
         modifier = modifier.fillMaxWidth(),
-        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.onBackground,
-            contentColor = MaterialTheme.colorScheme.background,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
         ),
     ) {
-        Text(
+        AdaptiveActionText(
             text = text,
             modifier = Modifier.padding(vertical = 8.dp),
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
         )
     }
 }
@@ -67,76 +74,112 @@ fun SelectionCard(
     imageResName: String? = null,
 ) {
     val imageResId = remember(imageResName) { resolvePreviewDrawableName(imageResName) }
+    val feedback = rememberUiFeedbackController()
 
     Card(
-        onClick = onClick,
+        onClick = {
+            feedback.onUiInteraction()
+            onClick()
+        },
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(),
     ) {
         BoxWithConstraints(
             modifier = Modifier.fillMaxSize(),
         ) {
-            val ultraCompact = maxHeight < 118.dp || maxWidth < 150.dp
-            val compact = ultraCompact || maxHeight < 152.dp || maxWidth < 184.dp
-            val padding = when {
-                ultraCompact -> 10.dp
-                compact -> 14.dp
-                else -> 20.dp
-            }
-            val spacing = when {
-                ultraCompact -> 6.dp
-                compact -> 8.dp
-                else -> 12.dp
-            }
-            val previewHeight = when {
-                subtitle.isNullOrBlank() && ultraCompact -> 38.dp
-                subtitle.isNullOrBlank() && compact -> 52.dp
-                subtitle.isNullOrBlank() -> 88.dp
-                ultraCompact -> 42.dp
-                compact -> 56.dp
-                else -> 92.dp
-            }
-            val titleStyle = when {
-                ultraCompact -> MaterialTheme.typography.titleSmall
-                compact -> MaterialTheme.typography.titleMedium
-                else -> MaterialTheme.typography.titleLarge
-            }
-            val subtitleStyle = when {
-                ultraCompact -> MaterialTheme.typography.bodySmall
-                compact -> MaterialTheme.typography.bodySmall
-                else -> MaterialTheme.typography.bodyMedium
+            val hasSubtitle = !subtitle.isNullOrBlank()
+            val metrics = remember(maxWidth, maxHeight, hasSubtitle) {
+                selectionCardMetrics(
+                    maxWidth = maxWidth,
+                    maxHeight = maxHeight,
+                    hasSubtitle = hasSubtitle,
+                )
             }
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(spacing, alignment = Alignment.CenterVertically),
+                verticalArrangement = Arrangement.spacedBy(metrics.spacing, alignment = Alignment.CenterVertically),
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = padding, vertical = padding),
+                    .padding(horizontal = metrics.padding, vertical = metrics.padding),
             ) {
                 CategoryPreviewSlot(
                     imageResId = imageResId,
-                    height = previewHeight,
+                    height = metrics.previewHeight,
                 )
-                Text(
+                AdaptiveCardText(
                     text = title,
-                    style = titleStyle,
-                    textAlign = TextAlign.Center,
-                    maxLines = if (compact) 2 else 3,
+                    largeStyle = MaterialTheme.typography.titleLarge.scaled(metrics.titleScale),
+                    mediumStyle = MaterialTheme.typography.titleMedium.scaled(metrics.titleScale * 1.02f),
+                    compactStyle = MaterialTheme.typography.titleSmall.scaled(metrics.titleScale),
+                    maxLines = metrics.titleMaxLines,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 subtitle?.takeIf { it.isNotBlank() }?.let {
-                    Text(
+                    AdaptiveCardText(
                         text = it,
-                        style = subtitleStyle,
-                        textAlign = TextAlign.Center,
-                        maxLines = if (compact) 3 else 4,
+                        largeStyle = MaterialTheme.typography.bodyLarge.scaled(metrics.subtitleScale),
+                        mediumStyle = MaterialTheme.typography.bodyMedium.scaled(metrics.subtitleScale),
+                        compactStyle = MaterialTheme.typography.bodyMedium
+                            .copy(fontSize = 14.sp, lineHeight = 18.sp)
+                            .scaled(metrics.subtitleScale),
+                        maxLines = metrics.subtitleMaxLines,
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
             }
         }
     }
+}
+
+private data class SelectionCardMetrics(
+    val padding: Dp,
+    val spacing: Dp,
+    val previewHeight: Dp,
+    val titleScale: Float,
+    val subtitleScale: Float,
+    val titleMaxLines: Int,
+    val subtitleMaxLines: Int,
+)
+
+private fun selectionCardMetrics(
+    maxWidth: Dp,
+    maxHeight: Dp,
+    hasSubtitle: Boolean,
+): SelectionCardMetrics {
+    val heightScale = (maxHeight.value / if (hasSubtitle) 250f else 190f).coerceIn(0.82f, 1.30f)
+    val widthScale = (maxWidth.value / if (hasSubtitle) 260f else 180f).coerceIn(0.88f, 1.18f)
+    val contentScale = (heightScale * 0.6f + widthScale * 0.4f).coerceIn(0.84f, 1.28f)
+    val padding = (maxHeight * if (hasSubtitle) 0.075f else 0.09f).coerceIn(10.dp, 24.dp)
+    val spacing = (maxHeight * if (hasSubtitle) 0.038f else 0.05f).coerceIn(6.dp, 18.dp)
+    val previewHeight = minOf(
+        maxHeight * if (hasSubtitle) 0.32f else 0.40f,
+        maxWidth * if (hasSubtitle) 0.34f else 0.42f,
+    ).coerceIn(
+        if (hasSubtitle) 40.dp else 34.dp,
+        if (hasSubtitle) 132.dp else 118.dp,
+    )
+
+    return SelectionCardMetrics(
+        padding = padding,
+        spacing = spacing,
+        previewHeight = previewHeight,
+        titleScale = (if (hasSubtitle) contentScale * 1.14f else contentScale * 1.06f).coerceIn(0.9f, 1.34f),
+        subtitleScale = (contentScale * 10.06f).coerceIn(0.94f, 1.2f),
+        titleMaxLines = if (hasSubtitle) 3 else 4,
+        subtitleMaxLines = if (maxHeight < 180.dp || maxWidth < 220.dp) 3 else 4,
+    )
+}
+
+private fun TextStyle.scaled(scale: Float): TextStyle = copy(
+    fontSize = fontSize.scaled(scale),
+    lineHeight = lineHeight.scaled(scale),
+)
+
+private fun TextUnit.scaled(scale: Float): TextUnit = if (this == TextUnit.Unspecified) {
+    this
+} else {
+    (value * scale).sp
 }
 
 @Composable
@@ -216,7 +259,10 @@ fun StepSettingCard(
     onDecrease: () -> Unit,
     onIncrease: () -> Unit,
     modifier: Modifier = Modifier,
+    valueContainerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceVariant,
+    valueContentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
 ) {
+    val feedback = rememberUiFeedbackController()
     val decreaseDescription = stringResource(id = R.string.action_decrease)
     val increaseDescription = stringResource(id = R.string.action_increase)
     val minusSymbol = stringResource(id = R.string.symbol_minus)
@@ -227,10 +273,12 @@ fun StepSettingCard(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.padding(16.dp),
         ) {
-            Text(
+            AdaptiveCardText(
                 text = title,
-                style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center,
+                largeStyle = MaterialTheme.typography.titleMedium,
+                mediumStyle = MaterialTheme.typography.titleSmall,
+                compactStyle = MaterialTheme.typography.bodyMedium,
+                maxLines = 3,
                 modifier = Modifier.fillMaxWidth(),
             )
             Row(
@@ -239,7 +287,10 @@ fun StepSettingCard(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 OutlinedButton(
-                    onClick = onDecrease,
+                    onClick = {
+                        feedback.onUiInteraction()
+                        onDecrease()
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .semantics { contentDescription = decreaseDescription },
@@ -253,7 +304,10 @@ fun StepSettingCard(
 
                 Card(
                     modifier = Modifier.weight(1f),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                    colors = CardDefaults.cardColors(
+                        containerColor = valueContainerColor,
+                        contentColor = valueContentColor,
+                    ),
                 ) {
                     Box(
                         contentAlignment = Alignment.Center,
@@ -261,17 +315,22 @@ fun StepSettingCard(
                             .fillMaxWidth()
                             .padding(horizontal = 12.dp, vertical = 14.dp),
                     ) {
-                        Text(
+                        AdaptiveCardText(
                             text = valueText,
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center,
+                            largeStyle = MaterialTheme.typography.titleLarge,
+                            mediumStyle = MaterialTheme.typography.titleMedium,
+                            compactStyle = MaterialTheme.typography.titleSmall,
+                            maxLines = 2,
                             modifier = Modifier.fillMaxWidth(),
                         )
                     }
                 }
 
                 OutlinedButton(
-                    onClick = onIncrease,
+                    onClick = {
+                        feedback.onUiInteraction()
+                        onIncrease()
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .semantics { contentDescription = increaseDescription },
@@ -294,6 +353,8 @@ fun ChoiceSettingCard(
     onPrevious: () -> Unit,
     onNext: () -> Unit,
     modifier: Modifier = Modifier,
+    valueContainerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceVariant,
+    valueContentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
 ) {
     StepSettingCard(
         title = title,
@@ -301,6 +362,8 @@ fun ChoiceSettingCard(
         onDecrease = onPrevious,
         onIncrease = onNext,
         modifier = modifier,
+        valueContainerColor = valueContainerColor,
+        valueContentColor = valueContentColor,
     )
 }
 
@@ -311,6 +374,7 @@ fun ToggleSettingCard(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val feedback = rememberUiFeedbackController()
     Card(modifier = modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -319,12 +383,22 @@ fun ToggleSettingCard(
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
-            Text(
+            AdaptiveCardText(
                 text = title,
-                style = MaterialTheme.typography.titleMedium,
+                largeStyle = MaterialTheme.typography.titleMedium,
+                mediumStyle = MaterialTheme.typography.titleSmall,
+                compactStyle = MaterialTheme.typography.bodyMedium,
+                maxLines = 3,
                 modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Start,
             )
-            Switch(checked = checked, onCheckedChange = onCheckedChange)
+            Switch(
+                checked = checked,
+                onCheckedChange = {
+                    feedback.onUiInteraction()
+                    onCheckedChange(it)
+                },
+            )
         }
     }
 }
@@ -341,6 +415,48 @@ fun SectionHeader(
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 4.dp),
+    )
+}
+
+@Composable
+private fun AdaptiveCardText(
+    text: String,
+    largeStyle: TextStyle,
+    mediumStyle: TextStyle,
+    compactStyle: TextStyle,
+    maxLines: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Center,
+) {
+    BoxWithConstraints(modifier = modifier) {
+        val style = when {
+            maxWidth < 104.dp || text.length > 58 -> compactStyle
+            maxWidth < 152.dp || text.length > 34 -> mediumStyle
+            else -> largeStyle
+        }
+        Text(
+            text = text,
+            style = style,
+            textAlign = textAlign,
+            maxLines = maxLines,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+private fun AdaptiveActionText(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
+    AdaptiveCardText(
+        text = text,
+        largeStyle = MaterialTheme.typography.titleLarge,
+        mediumStyle = MaterialTheme.typography.titleMedium,
+        compactStyle = MaterialTheme.typography.titleSmall,
+        maxLines = 2,
+        modifier = modifier,
     )
 }
 
