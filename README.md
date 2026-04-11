@@ -26,6 +26,16 @@ License: **MIT**. See [LICENSE](LICENSE).
 - settings stored in DataStore
 - active round state and topic history stored in Room
 - UI languages: Polish and English
+- configurable theme colors
+- configurable completion signal: **double tap**, **shake**, or **button**
+- configurable sound sets with fallback to built-in procedural sounds
+
+## Recent updates
+
+- fixed double-tap sound feedback so the feedback sound can be played consistently across the gameplay surface, while the round-completion logic still remains constrained to the intended gameplay area
+- added text shadows in the main menu, options, and shared UI text components to improve readability on high-contrast or even intentionally bad color combinations such as white text on a white background
+- strengthened sound availability fallback so missing or unavailable sound-set files can fall back to pre-rendered built-in procedural sounds more reliably
+- cleaned up minor UI code leftovers during the same pass
 
 ## Build
 
@@ -81,6 +91,37 @@ car_001|Ferrari|Ferrari
 car_002|Samochód elektryczny|Electric car
 ```
 
+### Sound sets
+
+`app/src/main/assets/soundsets/<set_id>/`
+
+The app auto-detects folders inside `assets/soundsets/` and exposes them in **Options > Sounds**.
+
+Supported filenames per event (first matching file wins):
+
+```text
+tap.*
+single_tap.*
+double_tap.*
+button_press.*
+topic_success.*
+topic_skip.*
+topic_timeout.*
+round_success.*
+round_failure.*
+```
+
+Supported extensions:
+
+```text
+ogg
+mp3
+wav
+m4a
+```
+
+Missing files are allowed. When a sound is unavailable, the app falls back to built-in procedural sounds.
+
 ## How to add a new category
 
 1. Create a new UTF-8 file in `app/src/main/assets/topics/`, for example `movies.txt`.
@@ -112,6 +153,15 @@ Rules:
 - UTF-8 encoding
 - no empty required fields
 
+## How to add a custom sound set
+
+1. Create a new folder in `app/src/main/assets/soundsets/`, for example `retro/`.
+2. Add one or more supported sound files using the event filenames listed above.
+3. Rebuild the app.
+4. Select the sound set in **Options > Sounds**.
+
+You do not need to provide every sound file. Partial sound packs are valid.
+
 ## Validation rules used by the app
 
 - lines starting with `#` are treated as comments
@@ -134,9 +184,18 @@ Rules:
 - `app/src/main/java/io/github/verbus/data/content/TopicFileParser.kt`
 - `app/src/main/java/io/github/verbus/data/content/AssetContentRepository.kt`
 - `app/src/main/java/io/github/verbus/ui/components/CommonComponents.kt`
+- `app/src/main/java/io/github/verbus/app/ProceduralSoundPlayer.kt`
 
 ## Notes
 
-- Topic history is used to reduce repeats between rounds.
-- The current repeat block window is 8 hours.
-- Active round state is restored after app resume or relaunch.
+- topic history is used to reduce repeats between rounds
+- the current repeat block window is 8 hours
+- active round state is restored after app resume or relaunch
+- the project is designed to work fully offline during gameplay
+
+## Safe follow-up improvements
+
+- add regression checks for tap, double-tap, shake, and button completion signals
+- audit and remove any unused resources after each UI/content pass
+- consider a small asset-integrity startup check for optional developer builds to catch missing sound files earlier
+- review unusual typography scale constants in shared UI components before further polishing passes
